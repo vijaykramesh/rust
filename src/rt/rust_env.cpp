@@ -18,6 +18,7 @@
 
 // The environment variables that the runtime knows about
 #define RUST_THREADS "RUST_THREADS"
+#define RUST_TEST_TASKS "RUST_TEST_TASKS"
 #define RUST_MIN_STACK "RUST_MIN_STACK"
 #define RUST_MAX_STACK "RUST_MAX_STACK"
 #define RUST_LOG "RUST_LOG"
@@ -84,7 +85,7 @@ get_num_cpus() {
 static int
 get_num_threads()
 {
-    char *env = getenv(RUST_THREADS);
+    char *env = getenv(RUST_TEST_TASKS) ? getenv(RUST_TEST_TASKS) : getenv(RUST_THREADS);
     if(env) {
         int num = atoi(env);
         if(num > 0)
